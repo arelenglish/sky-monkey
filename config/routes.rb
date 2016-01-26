@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :boarding_passes
   root 'static_pages#splash'
   resources :customers
   # The priority is based upon order of creation: first created -> highest priority.

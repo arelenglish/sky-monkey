@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @boarding_pass.price %>
+</p>
+
+<p>
+  <strong>Quantity:</strong>
+  <%= @boarding_pass.quantity %>
+</p>
+
+<p>
+  <strong>Tax paid:</strong>
+  <%= @boarding_pass.tax_paid %>
+</p>
+
+<p>
+  <strong>Expiration:</strong>
+  <%= @boarding_pass.expiration %>
+</p>
+
+<p>
+  <strong>Is valid:</strong>
+  <%= @boarding_pass.is_valid %>
+</p>
+
+<%= link_to 'Edit', edit_boarding_pass_path(@boarding_pass) %> |
+<%= link_to 'Back', boarding_passes_path %>

@@ -22,17 +22,14 @@ class CustomersController < ApplicationController
   end
 
   # POST /customers
-  # POST /customers.json
   def create
-    @customer = Customer.new(customer_params)
+    @customer = Customer.find_or_initialize_by(email: customer_params[:email])
 
     respond_to do |format|
-      if @customer.save
-        format.html { redirect_to @customer, notice: 'Customer was successfully created.' }
-        format.json { render :show, status: :created, location: @customer }
+      if @customer.update_attributes(customer_params)
+        format.html { redirect_to controller: 'boarding_passes', action: 'new' }
       else
         format.html { render :new }
-        format.json { render json: @customer.errors, status: :unprocessable_entity }
       end
     end
   end

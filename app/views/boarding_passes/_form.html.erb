@@ -13,24 +13,23 @@
 
   <div class="field">
     <%= f.label :price %><br>
-    <%= f.text_field :price %>
+    $<%= todays_price = Rate.todays_price %>
+    <%= f.hidden_field :price, value: todays_price %>
   </div>
   <div class="field">
     <%= f.label :quantity %><br>
-    <%= f.number_field :quantity %>
+    <%= f.select :quantity, (1..6)  %>
   </div>
   <div class="field">
     <%= f.label :tax_paid %><br>
-    <%= f.text_field :tax_paid %>
+    <%= todays_tax = Rate.todays_tax_rate %>%
+    <%= f.hidden_field :tax_paid, value: todays_tax %>
   </div>
   <div class="field">
-    <%= f.label :expiration %><br>
-    <%= f.datetime_select :expiration %>
+    <%= (todays_price * quantity) * (1 + (todays_tax/100))
   </div>
-  <div class="field">
-    <%= f.label :is_valid %><br>
-    <%= f.check_box :is_valid %>
-  </div>
+  <%= f.hidden_field :expiration, value: Time.now.utc.beginning_of_day + 14.days %>
+  <%= f.hidden_field :is_valid, value: true %>
   <div class="actions">
     <%= f.submit %>
   </div>

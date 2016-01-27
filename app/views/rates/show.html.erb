@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @rate.price %>
+</p>
+
+<p>
+  <strong>Tax Rate</strong>
+  <%= @rate.tax_rate %>
+</p>
+
+<p>
+  <strong>Active date:</strong>
+  <%= @rate.active_date %>
+</p>
+
+<%= link_to 'Edit', edit_rate_path(@rate) %> |
+<%= link_to 'Back', rates_path %>

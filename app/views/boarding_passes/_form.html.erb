@@ -25,11 +25,15 @@
     <%= todays_tax = Rate.todays_tax_rate %>%
     <%= f.hidden_field :tax_paid, value: todays_tax %>
   </div>
-  <div class="field">
-    <%= (todays_price * quantity) * (1 + (todays_tax/100))
-  </div>
   <%= f.hidden_field :expiration, value: Time.now.utc.beginning_of_day + 14.days %>
   <%= f.hidden_field :is_valid, value: true %>
+
+  <div class="field">
+    TOTAL
+    <!-- Use JS to dynamically update price on this screen -->
+    <%#= (todays_price * quantity) * (1 + (todays_tax/100)) %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

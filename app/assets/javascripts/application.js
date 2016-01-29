@@ -14,4 +14,5 @@
 //= require jquery_ujs
 //= require bootstrap.min
 //= require turbolinks
+//= require money_formatter
 //= require_tree .

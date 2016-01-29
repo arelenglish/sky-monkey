@@ -22,18 +22,10 @@ class BoardingPassesController < ApplicationController
   end
 
   # POST /boarding_passes
-  # POST /boarding_passes.json
   def create
-    @boarding_pass = BoardingPass.new(boarding_pass_params)
-
+    session[:boarding_pass] = boarding_pass_params
     respond_to do |format|
-      if @boarding_pass.save
-        format.html { redirect_to @boarding_pass, notice: 'Boarding pass was successfully created.' }
-        format.json { render :show, status: :created, location: @boarding_pass }
-      else
-        format.html { render :new }
-        format.json { render json: @boarding_pass.errors, status: :unprocessable_entity }
-      end
+      format.html { redirect_to controller: 'payment_processor_simulators', action: 'new' }
     end
   end
 

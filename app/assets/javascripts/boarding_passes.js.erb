@@ -1,0 +1,13 @@
+$(document).ready(function() {
+  // var price = $('#todays-price').text();
+  // $('#title').text(price);
+  $("#boarding_pass_quantity").change(function() {
+    var tkt_qty = $('#boarding_pass_quantity').val();
+    var price = <%= Rate.todays_price %>
+    var tax_rate = <%= Rate.todays_tax_rate %>
+
+    $('#total-val').text(
+      '$' + ((price * tkt_qty) * (1 + tax_rate/100)
+    ).formatMoney(2));
+  });
+});

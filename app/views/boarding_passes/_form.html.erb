@@ -13,12 +13,13 @@
 
   <div class="field">
     <%= f.label :price %><br>
-    $<%= todays_price = Rate.todays_price %>
+      <% todays_price = Rate.todays_price %>
+      <%= number_to_currency(todays_price, unit: '$') %>
     <%= f.hidden_field :price, value: todays_price %>
   </div>
   <div class="field">
     <%= f.label :quantity %><br>
-    <%= f.select :quantity, (1..6)  %>
+    <%= f.select :quantity, (0..6)  %>
   </div>
   <div class="field">
     <%= f.label :tax_paid %><br>
@@ -30,8 +31,7 @@
 
   <div class="field">
     TOTAL
-    <!-- Use JS to dynamically update price on this screen -->
-    <%#= (todays_price * quantity) * (1 + (todays_tax/100)) %>
+    <p id=total-val>$0.00</p>
   </div>
 
   <div class="actions">

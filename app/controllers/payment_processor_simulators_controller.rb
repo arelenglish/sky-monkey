@@ -23,7 +23,9 @@ class PaymentProcessorSimulatorsController < ApplicationController
     boarding_pass = BoardingPass.create(session[:boarding_pass])
     # add token to user
     customer = Customer.find(session[:customer]["id"])
-    cc_info = PaymentProcessorSimulator.new(session[:credit_card])
+    cc_info = PaymentProcessorSimulator.new(
+      session[:credit_card].except("errors")
+    )
     cc_info.add_customer_token(customer)
     # show success message
 

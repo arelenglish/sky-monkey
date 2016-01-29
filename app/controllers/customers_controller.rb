@@ -27,6 +27,7 @@ class CustomersController < ApplicationController
 
     respond_to do |format|
       if @customer.update_attributes(customer_params)
+        session[:customer] = @customer
         format.html { redirect_to controller: 'boarding_passes', action: 'new' }
       else
         format.html { render :new }

@@ -1,0 +1,22 @@
+<% boarding_pass = session[:boarding_pass] %>
+<% price = boarding_pass["price"] %>
+<% tax_rate = boarding_pass["tax_paid"] %>
+<!-- SHOW NUMBER OF TICKETS -->
+<h3>Number of Tickets</h3>
+<%= tkt_qty = boarding_pass["quantity"] %>
+<!-- THE subtotal of tickets -->
+<h3>Subtotal</h3>
+<%= number_to_currency(sub_total = tkt_qty.to_i * price.to_f, unit: '$') %>
+<!-- tax to be collected -->
+<h3>Tax</h3>
+<%= number_to_currency(tax_rate/100 * sub_total, unit: '$') %>
+<!-- the amount due -->
+<h3>Grand Total</h3>
+<%= number_to_currency(BoardingPass.grand_total(tkt_qty, price, tax_rate), unit: '$') %>
+<!-- Show the last 4 digits of the credit card number -->
+<h3>Last 4 digits of credit card number</h3>
+<%= session[:credit_card].last_four %>
+<!-- Show a button to "Purchase Tickets" -->
+<form action="<%= payments_purchase_url %>" method="post">
+  <%= csrf_token %>
+<button>Purchase Tickets</button>

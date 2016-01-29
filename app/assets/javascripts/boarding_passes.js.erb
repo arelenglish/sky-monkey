@@ -7,7 +7,7 @@ $(document).ready(function() {
     var tax_rate = <%= Rate.todays_tax_rate %>
 
     $('#total-val').text(
-      '$' + ((price * tkt_qty) * (1 + tax_rate/100)
+      '$' + ((price * tkt_qty) * (1 + (tax_rate/100))
     ).formatMoney(2));
   });
 });

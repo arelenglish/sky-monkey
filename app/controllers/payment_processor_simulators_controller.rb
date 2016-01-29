@@ -7,12 +7,29 @@ class PaymentProcessorSimulatorsController < ApplicationController
     @cc_info = PaymentProcessorSimulator.new(pps_params)
     respond_to do |format|
       if @cc_info.valid?
-        format.html { redirect_to controller: 'boarding_passes', action: 'new' }
+        session[:credit_card] = @cc_info
+        format.html { render :checkout }
       else
         format.html { render :new }
-        # format.html { render controller: 'payment_processor_simulators', action: 'new' }
       end
     end
+  end
+
+  def checkout
+  end
+
+  def confirmation
+    # create boarding pass
+    boarding_pass = BoardingPass.create(session[:boarding_pass])
+    # add token to user
+    customer = Customer.find(session[:customer]["id"])
+    cc_info = PaymentProcessorSimulator.new(session[:credit_card])
+    cc_info.add_customer_token(customer)
+    # show success message
+
+    # Send a confirmation email to the customer with a basic summary of their purchase and their boarding pass.
+    # Show a boarding pass (either a QR code or a simple unique code as described below)
+    # create transaction if boarding passes doesn't give enough infor for reports
   end
 
   private
@@ -22,8 +39,5 @@ class PaymentProcessorSimulatorsController < ApplicationController
       :expiration,
       :cvc
     )
-    # p = params[:payment_processor_simulator]
-    # expiration = Date.new(p["expiration(1i)"].to_i, p["expiration(2i)"].to_i, p["expiration(3i)"].to_i)
-    # {cc_number: p[:cc_number], expiration: expiration, cvc: p[:cvc]}
   end
 end

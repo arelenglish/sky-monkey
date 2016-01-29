@@ -23,22 +23,21 @@ class BoardingPassesController < ApplicationController
 
   # POST /boarding_passes
   def create
-    session[:boarding_pass] = boarding_pass_params
+    @boarding_pass = BoardingPass.new(boarding_pass_params)
+    session[:boarding_pass] = @boarding_pass
     respond_to do |format|
       format.html { redirect_to controller: 'payment_processor_simulators', action: 'new' }
     end
   end
 
   # PATCH/PUT /boarding_passes/1
-  # PATCH/PUT /boarding_passes/1.json
   def update
     respond_to do |format|
       if @boarding_pass.update(boarding_pass_params)
+        session[:boarding_pass] = @boarding_pass
         format.html { redirect_to @boarding_pass, notice: 'Boarding pass was successfully updated.' }
-        format.json { render :show, status: :ok, location: @boarding_pass }
       else
         format.html { render :edit }
-        format.json { render json: @boarding_pass.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -61,6 +60,13 @@ class BoardingPassesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def boarding_pass_params
-      params.require(:boarding_pass).permit(:price, :quantity, :tax_paid, :expiration, :is_valid)
+      params.require(:boarding_pass).permit(
+        :price,
+        :quantity,
+        :tax_paid,
+        :expiration,
+        :is_valid,
+        :customer_id
+      )
     end
 end

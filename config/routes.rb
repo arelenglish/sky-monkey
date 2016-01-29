@@ -2,9 +2,11 @@ Rails.application.routes.draw do
   resources :rates
   resources :boarding_passes
   root 'static_pages#splash'
-  get 'payments' => 'payment_processor_simulators#index', as: 'payment_processor_simulators'
+  # get 'payments' => 'payment_processor_simulators#index', as: 'payment_processor_simulators'
   get 'payments/new' => 'payment_processor_simulators#new', as: 'new_payment'
-  post 'payments' => 'payment_processor_simulators#create', as: ''
+  post 'payments' => 'payment_processor_simulators#create'
+  get 'payments/checkout' => 'payment_processor_simulators#checkout'
+  post 'payments/purchase' => 'payment_processor_simulators#confirmation'
   resources :customers
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

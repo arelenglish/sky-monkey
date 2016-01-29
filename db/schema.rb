@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160128015833) do
+ActiveRecord::Schema.define(version: 20160129060234) do
 
   create_table "boarding_passes", force: :cascade do |t|
     t.float    "price"
@@ -19,8 +19,9 @@ ActiveRecord::Schema.define(version: 20160128015833) do
     t.float    "tax_paid"
     t.datetime "expiration"
     t.boolean  "is_valid"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "customer_id"
   end
 
   create_table "customers", force: :cascade do |t|

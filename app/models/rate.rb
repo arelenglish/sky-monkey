@@ -11,16 +11,16 @@ class Rate < ActiveRecord::Base
   end
 
   def self.todays_price
-    if price = find_by(active_date: Time.now.utc.beginning_of_day).price
-      price
+    if daily_rate = find_by(active_date: Time.now.utc.beginning_of_day)
+      daily_rate.price
     else
       75
     end
   end
 
   def self.todays_tax_rate
-    if tax_rate = find_by(active_date: Time.now.utc.beginning_of_day).tax_rate
-      tax_rate
+    if daily_rate = find_by(active_date: Time.now.utc.beginning_of_day)
+      daily_rate.tax_rate
     else
       8.875
     end

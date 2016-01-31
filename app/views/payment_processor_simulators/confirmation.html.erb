@@ -1,1 +1,13 @@
-blarg
+<% if flash[:notice] %>
+  <div class="alert alert-success"><%= flash[:notice] %></div>
+<% end %>
+
+<h1 class="text-center">Boarding Pass</h1>
+<p class="lead text-center"> This is your boarding pass. You'll also get an email with your boarding pass in it. Thanks for using Sky Monkey.</p>
+<p>
+  <% if @boarding_pass %>
+    <%= image_tag("/boarding_passes/boarding_pass#{@boarding_pass.id}.png") %>
+  <% else %>
+    <p>There was an issue creating your boarding pass. Please call customer service at: 1800-5-MONKEY</p>
+  <% end %>
+</p>

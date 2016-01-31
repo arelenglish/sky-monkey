@@ -6,7 +6,7 @@ class Rate < ActiveRecord::Base
     if last_rate = where.not(tax_rate: nil).last
       last_rate.tax_rate
     else
-      10.0
+      8.875
     end
   end
 

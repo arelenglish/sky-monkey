@@ -1,6 +1,6 @@
 <% if @cc_info.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@cc_info.errors.count, "error") %> prohibited this rate from being saved:</h2>
+  <div class="alert alert-danger" role="alert">
+    <h2><%= pluralize(@cc_info.errors.count, "error") %> prohibited your payment from being accepted:</h2>
     <ul>
       <% @cc_info.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -11,12 +11,23 @@
 
 <form action="<%= payments_url %>" method="post">
   <%= csrf_token %>
-
-  <input type="number" name="payment_processor_simulator[cc_number]" value="<%= @cc_info.cc_number %>" placeholder="Credit Card Number">
-
-  <input type="date" name="payment_processor_simulator[expiration]" value="<%= @cc_info.expiration %>" placeholder="Expiration Date">
-
-  <input type="number" name="payment_processor_simulator[cvc]" value="<%= @cc_info.cvc %>" placeholder="CVC">
-
-  <button>Continue to checkout</button>
+  <p>
+    <label for="Credit Card Number">Credit Card Number</label>
+    <input type="number" name="payment_processor_simulator[cc_number]" value="<%= session[:credit_card]['cc_number'] %>" placeholder="Credit Card Number", class='form-control'>
+  </p>
+  <p>
+    <label for="expiration date">Expiration Date</label>
+    <input type="month" name="payment_processor_simulator[expiration]" value="<%= session[:credit_card]['expiration'] %>" placeholder="Expiration Date", class='form-control'>
+  </p>
+  <p>
+    <label for="CVC">CVC</label>
+    <input type="number" name="payment_processor_simulator[cvc]" value="<%= session[:credit_card]['cvc'] %>" placeholder="CVC", class='form-control'>
+  </p>
+  <p>
+    <div class="col-xs-12 col-sm-6 col-md-12 text-center">
+      <button class="btn btn-primary btn-lg btn-block">
+        Continue to checkout
+      </button>
+    </div>
+  </p>
 </form>

@@ -1,24 +1,10 @@
 class CustomersController < ApplicationController
-  before_action :set_customer, only: [:show, :edit, :update, :destroy]
-
-  # GET /customers
-  # GET /customers.json
-  def index
-    @customers = Customer.all
-  end
-
-  # GET /customers/1
-  # GET /customers/1.json
-  def show
-  end
+  before_action :set_customer, only: [:update]
 
   # GET /customers/new
   def new
+    session[:customer] ||= {}
     @customer = Customer.new
-  end
-
-  # GET /customers/1/edit
-  def edit
   end
 
   # POST /customers
@@ -41,18 +27,8 @@ class CustomersController < ApplicationController
       if @customer.update(customer_params)
         format.html { redirect_to controller: 'boarding_passes', action: 'new'}
       else
-        format.html { render :edit }
+        format.html { render :new }
       end
-    end
-  end
-
-  # DELETE /customers/1
-  # DELETE /customers/1.json
-  def destroy
-    @customer.destroy
-    respond_to do |format|
-      format.html { redirect_to customers_url, notice: 'Customer was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 

@@ -1,5 +1,8 @@
-<img src="http://www.how-to-draw-cartoons-online.com/image-files/wizard-of-oz-flying-monkey.gif"><!-- replace with image served by asset pipeline -->
-<h1>Welcome to Sky Monkey</h1>
-  <p>Sky Monkey is a helicopter tour operator. We provide the best helicopter tours anyone has ever offered. You'll love them</p>
+<%= image_tag('wizard-of-oz-flying-monkey.gif', class: 'img-responsive center-block') %>
 
-  <%= link_to 'Buy Tickets', new_customer_path, {class: 'btn btn-default', type: 'submit'} %>
+<h1 class="text-center">Welcome to Sky Monkey</h1>
+  <p class="lead text-center">Have the experience of a lifetime with a helicopter tour from Sky Monkey. Helicopters run continuously and passengers are boarded on a first-come first-served basis. Buy a ticket to receive a boarding pass that may be used any time within 14 days or purchase.</p>
+
+<div class="col-xs-12 col-sm-6 col-md-12 text-center">
+    <%= link_to 'Buy Tickets', new_customer_path, {class: 'btn btn-primary btn-lg btn-block', type: 'button'} %>
+</div>

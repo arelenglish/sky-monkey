@@ -1,41 +1,27 @@
 <%= form_for(@boarding_pass) do |f| %>
-  <% if @boarding_pass.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@boarding_pass.errors.count, "error") %> prohibited this boarding_pass from being saved:</h2>
 
-      <ul>
-      <% @boarding_pass.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :price %><br>
-      <% todays_price = Rate.todays_price %>
-      <%= number_to_currency(todays_price, unit: '$') %>
+  <div>
+    <h4><%= f.label :quantity %></h4>
+    <%= f.select :quantity, (0..6), {}, {class:'dropdown'} %>
+  </div>
+  <div>
+    <h4><%= f.label :price %></h4>
+    <% todays_price = Rate.todays_price %>
+    <%= number_to_currency(todays_price, unit: '$') %>
     <%= f.hidden_field :price, value: todays_price %>
   </div>
-  <div class="field">
-    <%= f.label :quantity %><br>
-    <%= f.select :quantity, (0..6)  %>
-  </div>
-  <div class="field">
-    <%= f.label :tax_paid %><br>
-    <%= todays_tax = Rate.todays_tax_rate %>%
-    <%= f.hidden_field :tax_paid, value: todays_tax %>
-  </div>
+
   <%= f.hidden_field :expiration, value: Time.now.utc.beginning_of_day + 14.days %>
   <%= f.hidden_field :customer_id, value: session[:customer]["id"] %>
   <%= f.hidden_field :is_valid, value: true %>
-
-  <div class="field">
-    TOTAL
-    <p id=total-val>$0.00</p>
+  <hr>
+  <div>
+    <h4>SUBTOTAL</h4>
+    <p class=lead id=total-val>$0.00</p>
   </div>
 
-  <div class="actions">
-    <%= f.submit %>
+  <div class="col-xs-12 col-sm-6 col-md-12 text-center">
+    <%= f.submit 'Continue to Payment Method', class: 'btn btn-primary btn-lg btn-block' %>
   </div>
+
 <% end %>

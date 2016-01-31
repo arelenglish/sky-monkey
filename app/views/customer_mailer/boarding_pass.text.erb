@@ -1,0 +1,10 @@
+Thanks for flying Sky Monkey, <%= @customer.name %>
+===============================================
+
+<% if @customer.boarding_passes.last.quantity > 1 %>
+  Here are your boarding passes.
+<% else %>
+  Your boarding pass is attached to this email
+<% end %>
+
+Thanks for using Sky Monkey! Enjoy your flight!

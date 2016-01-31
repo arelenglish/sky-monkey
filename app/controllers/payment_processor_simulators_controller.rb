@@ -1,5 +1,6 @@
 class PaymentProcessorSimulatorsController < ApplicationController
   def new
+    session[:credit_card] ||= {}
     @cc_info = PaymentProcessorSimulator.new
   end
 
@@ -16,22 +17,26 @@ class PaymentProcessorSimulatorsController < ApplicationController
   end
 
   def checkout
-  end
-
-  def confirmation
-    # create boarding pass
-    boarding_pass = BoardingPass.create(session[:boarding_pass])
-    # add token to user
     customer = Customer.find(session[:customer]["id"])
     cc_info = PaymentProcessorSimulator.new(
       session[:credit_card].except("errors")
     )
-    cc_info.add_customer_token(customer)
-    # show success message
+    if cc_info.valid_card?
+      cc_info.add_customer_token(customer)
+      if boarding_pass = BoardingPass.create(session[:boarding_pass])
+        flash[:notice] = "Purchase Successful! Thanks for using Sky Monkey!"
+        boarding_pass.generate_code
+        redirect_to payments_purchase_url and return
+      else
+        flash[:notice] = "There was a problem generating your boarding pass. Please call support."
+      end
+    end
+  end
 
-    # Send a confirmation email to the customer with a basic summary of their purchase and their boarding pass.
-    # Show a boarding pass (either a QR code or a simple unique code as described below)
-    # create transaction if boarding passes doesn't give enough infor for reports
+  def confirmation
+    @boarding_pass = BoardingPass.where(
+      customer_id:session[:boarding_pass]['customer_id']
+    ).last
   end
 
   private

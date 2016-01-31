@@ -7,6 +7,7 @@ class PaymentProcessorSimulator
   validates :cvc, presence: true, length: { in: 3..4}
   validate :expiration_date_cannot_be_in_the_past
 
+  # This is where the card gets charged as well
   def valid_card?
     true
   end
@@ -27,8 +28,9 @@ class PaymentProcessorSimulator
 
 private
   def expiration_date_cannot_be_in_the_past
-    errors.add(:expiration, "can't be in the past") if
-      !expiration.blank? and expiration.to_date < Date.today
+    if expiration.blank? || Date.new(expiration.to_i) < Date.today.beginning_of_month
+      errors.add(:expiration, "can't be in the past")
+    end
   end
 
 end

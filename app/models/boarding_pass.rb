@@ -9,7 +9,7 @@ class BoardingPass < ActiveRecord::Base
     (price.to_f * quantity.to_i) * (1 + tax_paid.to_f/100)
   end
 
-  def generate_code
+  def generate_qrcode
     code = "quantity:#{self.quantity}, expriation:#{self.expiration}, valid:#{self.is_valid}"
     qr = RQRCode::QRCode.new(code)
     qr.as_png.save("./public/boarding_passes/boarding_pass#{self.id}.png")

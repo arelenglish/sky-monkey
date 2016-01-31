@@ -25,7 +25,7 @@ class PaymentProcessorSimulatorsController < ApplicationController
       cc_info.add_customer_token(customer)
       if boarding_pass = BoardingPass.create(session[:boarding_pass])
         flash[:notice] = "Purchase Successful! Thanks for using Sky Monkey!"
-        boarding_pass.generate_code
+        boarding_pass.generate_qrcode
         redirect_to confirmation_url and return
       else
         flash[:notice] = "There was a problem generating your boarding pass. Please call support."

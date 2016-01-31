@@ -11,9 +11,11 @@ RSpec.describe BoardingPass, type: :model do
     end
   end
 
-  describe "#generate_code" do
-    xit "saves a QR code in /public" do
-      expect(boarding_pass.generate_code).to include('boarding_pass12.png')
+  describe "#generate_qrcode" do
+    it "saves a QR code in /public" do
+      boarding_pass.generate_qrcode
+      expect(Dir.entries('./public/boarding_passes/').include?('boarding_pass12.png')).to be(true)
+      FileUtils.rm('./public/boarding_passes/boarding_pass12.png')
     end
   end
 

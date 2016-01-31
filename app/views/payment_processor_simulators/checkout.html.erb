@@ -4,6 +4,8 @@
   <% price = boarding_pass["price"] %>
   <% tax_rate = Rate.todays_tax_rate %>
 
+  <p id="checkout-flash"></p>
+
   <p>
     <h4>Number of Tickets</h3>
     <%= tkt_qty = boarding_pass["quantity"] %>
@@ -29,7 +31,7 @@
     <form action="<%= payments_checkout_url %>" method="post">
       <%= csrf_token %>
       <div class="col-xs-12 col-sm-6 col-md-12 text-center">
-        <button class="btn btn-primary btn-lg btn-block">
+        <button class="btn btn-primary btn-lg btn-block" id="checkout-button">
           Purchase Tickets
         </button>
       </div>

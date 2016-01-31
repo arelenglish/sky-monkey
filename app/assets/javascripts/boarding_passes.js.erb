@@ -5,4 +5,8 @@ $(document).ready(function() {
 
     $('#total-val').text('$' + (price * tkt_qty).formatMoney(2));
   });
+
+  $('#checkout-button').click(function() {
+    $('#checkout-flash').append("<div class='alert alert-success'>Please wait for your boarding pass to be generated.</div>");
+  });
 });

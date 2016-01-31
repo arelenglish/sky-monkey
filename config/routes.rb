@@ -4,9 +4,9 @@ Rails.application.routes.draw do
   root 'static_pages#splash'
   # get 'payments' => 'payment_processor_simulators#index', as: 'payment_processor_simulators'
   get 'payments/new' => 'payment_processor_simulators#new', as: 'new_payment'
-  post 'payments' => 'payment_processor_simulators#create'
+  post 'checkout' => 'payment_processor_simulators#create'
   post 'payments/checkout' => 'payment_processor_simulators#checkout'
-  get 'payments/purchase' => 'payment_processor_simulators#confirmation'
+  get 'confirmation' => 'payment_processor_simulators#confirmation'
   resources :customers, only: [:new, :create, :update]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

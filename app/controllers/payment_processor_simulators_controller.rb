@@ -26,7 +26,7 @@ class PaymentProcessorSimulatorsController < ApplicationController
       if boarding_pass = BoardingPass.create(session[:boarding_pass])
         flash[:notice] = "Purchase Successful! Thanks for using Sky Monkey!"
         boarding_pass.generate_code
-        redirect_to payments_purchase_url and return
+        redirect_to confirmation_url and return
       else
         flash[:notice] = "There was a problem generating your boarding pass. Please call support."
       end

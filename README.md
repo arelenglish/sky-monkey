@@ -5,4 +5,3 @@
 * Configure action_mailer to actually send emails using something like postmark or mandrill
 
 * install RSpec and write tests
-* style

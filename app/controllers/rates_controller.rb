@@ -2,13 +2,11 @@ class RatesController < ApplicationController
   before_action :set_rate, only: [:show, :edit, :update, :destroy]
 
   # GET /rates
-  # GET /rates.json
   def index
     @rates = Rate.all
   end
 
   # GET /rates/1
-  # GET /rates/1.json
   def show
   end
 
@@ -34,26 +32,21 @@ class RatesController < ApplicationController
   end
 
   # PATCH/PUT /rates/1
-  # PATCH/PUT /rates/1.json
   def update
     respond_to do |format|
       if @rate.update(rate_params)
         format.html { redirect_to @rate, notice: 'Rate was successfully updated.' }
-        format.json { render :show, status: :ok, location: @rate }
       else
         format.html { render :edit }
-        format.json { render json: @rate.errors, status: :unprocessable_entity }
       end
     end
   end
 
   # DELETE /rates/1
-  # DELETE /rates/1.json
   def destroy
     @rate.destroy
     respond_to do |format|
       format.html { redirect_to rates_url, notice: 'Rate was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 

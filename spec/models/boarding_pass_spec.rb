@@ -17,6 +17,18 @@ RSpec.describe BoardingPass, type: :model do
     end
   end
 
+  describe "#sub_total" do
+    it "returns the amount due before tax" do
+      expect(boarding_pass.sub_total).to eq(150)
+    end
+  end
+
+  describe "#total_tax" do
+    it "returns the amount of tax to be paid" do
+      expect(boarding_pass.total_tax).to eq(13.3125)
+    end
+  end
+
   describe "#generate_qrcode" do
     it "saves a QR code in /public" do
       boarding_pass.generate_qrcode

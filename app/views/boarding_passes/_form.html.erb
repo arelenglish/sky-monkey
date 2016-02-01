@@ -12,6 +12,7 @@
   </div>
 
   <%= f.hidden_field :expiration, value: Time.now.utc.beginning_of_day + 14.days %>
+  <%= f.hidden_field :tax_paid, value: Rate.todays_tax_rate %>
   <%= f.hidden_field :customer_id, value: session[:customer]["id"] %>
   <%= f.hidden_field :is_valid, value: true %>
   <hr>

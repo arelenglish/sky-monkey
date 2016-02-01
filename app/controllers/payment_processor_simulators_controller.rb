@@ -5,6 +5,7 @@ class PaymentProcessorSimulatorsController < ApplicationController
   end
 
   def create
+    @boarding_pass = BoardingPass.new(session[:boarding_pass])
     @cc_info = PaymentProcessorSimulator.new(pps_params)
     respond_to do |format|
       if @cc_info.valid?

@@ -9,6 +9,14 @@ class BoardingPass < ActiveRecord::Base
     (price.to_f * quantity.to_i) * (1 + tax_paid.to_f/100)
   end
 
+  def sub_total
+    quantity.to_i * price.to_f
+  end
+
+  def total_tax
+    tax_paid/100 * sub_total
+  end
+
   def generate_qrcode
     code = "quantity:#{self.quantity}, expriation:#{self.expiration}, valid:#{self.is_valid}"
     qr = RQRCode::QRCode.new(code)

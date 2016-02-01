@@ -22,7 +22,7 @@ class PaymentProcessorSimulatorsController < ApplicationController
       session[:credit_card].except("errors")
     )
     if cc_info.valid_card?
-      cc_info.add_customer_token(customer)
+      customer.add_token(cc_info)
       if boarding_pass = BoardingPass.create(session[:boarding_pass])
         flash[:notice] = "Purchase Successful! Thanks for using Sky Monkey!"
         boarding_pass.generate_qrcode

@@ -14,12 +14,7 @@ class PaymentProcessorSimulator
 
   def tokenize
     # Ultra secure credit card hash - add all three values together.
-    token = @cc_number + @expiration + @cvc
-  end
-
-  def add_customer_token(customer)
-    token = tokenize
-    customer.update_attributes(cc_token: token)
+    token = @cc_number.to_s + @expiration + @cvc.to_s
   end
 
   def last_four

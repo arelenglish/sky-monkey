@@ -8,10 +8,6 @@ RSpec.describe PaymentProcessorSimulator, type: :model do
       cvc:'123'})
   end
 
-  subject(:customer) do
-    Customer.new
-  end
-
   describe "#valid_card?" do
     it "returns true" do
       expect(payment_processor_simulator.valid_card?).to eq(true)

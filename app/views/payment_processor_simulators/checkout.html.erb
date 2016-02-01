@@ -19,7 +19,7 @@
 
   <p>
     <h4>Last 4 digits of credit card number</h4>
-    <%= session[:credit_card].last_four %>
+    <%= @cc_info.last_four %>
   </p>
   <p>
     <form action="<%= payments_checkout_url %>" method="post">

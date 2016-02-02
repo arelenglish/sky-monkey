@@ -35,7 +35,7 @@ RSpec.describe CustomersController, type: :controller do
     context "with invalid params" do
       it "assignes a newly created but unsaved customer as @customer" do
         post :create, {customer: {"name" => "", "email" => "bob.co"}}
-        expect(assignes(:customer)).to be_a_new(Customer)
+        expect(assigns(:customer)).to be_a_new(Customer)
       end
 
       it "re-renders the 'new' template" do

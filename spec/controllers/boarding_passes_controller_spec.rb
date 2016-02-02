@@ -12,7 +12,6 @@ RSpec.describe BoardingPassesController, type: :controller do
     it "assigns a new boarding_pass as @boarding_pass" do
       get :new, {}
       expect(assigns(:boarding_pass)).to be_a_new(BoardingPass)
-      expect(session[:boarding_pass]).to eq({})
     end
   end
 

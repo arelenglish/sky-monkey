@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Rate, type: :model do
 
   let(:rate){
-    Rate.create({price: 12, tax_rate: 12.53, active_date: Time.now.utc.beginning_of_day})
+    Rate.create(price: 12, tax_rate: 12.53, active_date: Time.now.utc.beginning_of_day)
   }
 
   describe "::last_tax_rate" do

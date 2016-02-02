@@ -2,10 +2,10 @@ require 'rails_helper'
 
 RSpec.describe PaymentProcessorSimulator, type: :model do
   subject(:payment_processor_simulator) do
-    PaymentProcessorSimulator.new({
+    PaymentProcessorSimulator.new(
       cc_number:'123454545454543',
       expiration:'2014, july',
-      cvc:'123'})
+      cvc:'123')
   end
 
   describe "#valid_card?" do

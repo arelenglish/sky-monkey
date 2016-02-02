@@ -1,15 +1,16 @@
 class PaymentProcessorSimulatorsController < ApplicationController
+
   def new
     session[:credit_card] ||= {}
-    @cc_info = PaymentProcessorSimulator.new
+    @payment = PaymentProcessorSimulator.new
   end
 
   def create
     @boarding_pass = BoardingPass.new(session[:boarding_pass])
-    @cc_info = PaymentProcessorSimulator.new(pps_params)
+    @payment = PaymentProcessorSimulator.new(pps_params)
     respond_to do |format|
-      if @cc_info.valid?
-        session[:credit_card] = @cc_info
+      if @payment.valid?
+        session[:credit_card] = @payment
         format.html { render :checkout }
       else
         format.html { render :new }
@@ -19,11 +20,11 @@ class PaymentProcessorSimulatorsController < ApplicationController
 
   def checkout
     customer = Customer.find(session[:customer]["id"])
-    cc_info = PaymentProcessorSimulator.new(
+    payment = PaymentProcessorSimulator.new(
       session[:credit_card].except("errors")
     )
-    if cc_info.valid_card?
-      customer.add_token(cc_info)
+    if payment.valid_card?
+      customer.add_token(payment)
       if boarding_pass = BoardingPass.create(session[:boarding_pass])
         flash[:notice] = "Purchase Successful! Thanks for using Sky Monkey!"
         boarding_pass.generate_qrcode

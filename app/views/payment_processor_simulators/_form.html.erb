@@ -1,8 +1,8 @@
-<% if @cc_info.errors.any? %>
+<% if @payment.errors.any? %>
   <div class="alert alert-danger" role="alert">
-    <h2><%= pluralize(@cc_info.errors.count, "error") %> prohibited your payment from being accepted:</h2>
+    <h2><%= pluralize(@payment.errors.count, "error") %> prohibited your payment from being accepted:</h2>
     <ul>
-      <% @cc_info.errors.full_messages.each do |message| %>
+      <% @payment.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
     </ul>

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe PaymentProcessorSimulator, type: :model do
   subject(:customer) do
-    Customer.new({name:'Arel', email:'arel@skymonkey.com'})
+    Customer.new(name:'Arel', email:'arel@skymonkey.com')
   end
 
   subject(:payment_processor_simulator) do

@@ -6,10 +6,11 @@ RSpec.describe PaymentProcessorSimulator, type: :model do
   end
 
   subject(:payment_processor_simulator) do
-    PaymentProcessorSimulator.new({
-      cc_number:'123454545454543',
-      expiration:'2014, july',
-      cvc:'123'})
+    PaymentProcessorSimulator.new(payment_params:{
+        cc_number: "123456789876543",
+        expiration: "2020-06",
+        cvc: "123"
+      })
   end
 
   describe "#add_token(payment_processor_simulator)" do

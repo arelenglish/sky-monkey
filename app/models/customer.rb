@@ -4,8 +4,7 @@ class Customer < ActiveRecord::Base
   # email: true is a custom validator
   validates :email, presence: true, email: true
 
-  def add_token(payment_processor_simulator)
-    token = payment_processor_simulator.tokenize
+  def add_token(token)
     update_attributes(cc_token: token)
   end
 

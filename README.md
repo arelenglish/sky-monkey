@@ -1,4 +1,8 @@
 # Sky Monkey
+
+# Installation
+* ruby 2.2.2 or above required
+
 ### Not implemented
 * At the end of each day a job should kick off to mark any tickets invalid that have expired.
 * call mark_invalid method after a boarding pass is used.

@@ -1,5 +1,7 @@
 # Sky Monkey
 
+Sky Monkey is a simple web app that allows users to buy tickets to things, and get a boarding pass. It was written as part of a job interview. 
+
 # Installation
 * run `bundle install`
 * run `rake db:migrate`
